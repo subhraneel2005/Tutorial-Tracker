@@ -1,4 +1,5 @@
-import Tutorials from "./components/Tutorials";
+import Tutorials from "@/components/Tutorials";
+
 
 
 export default function Home() {

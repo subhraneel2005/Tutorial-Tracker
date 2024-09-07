@@ -1,4 +1,5 @@
-import Create from "@/app/components/Create"
+import Create from "@/components/Create";
+
 
 export default function Tutorial(){
     return(
