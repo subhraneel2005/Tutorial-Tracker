@@ -53,7 +53,7 @@ function Tutorials() {
     <div className='min-h-screen w-full flex flex-col justify-center items-center'>
 
       <nav className='flex w-full justify-between py-4 px-10'>
-        <p className='font-bold'>Tutorial Tracker</p>
+        <p className='font-bold'>Tutorial Tracker 📝</p>
         <div className='flex gap-4'>
           <DropdownMenu>
             <DropdownMenuTrigger>

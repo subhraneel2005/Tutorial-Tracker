@@ -73,7 +73,7 @@ function Create() {
   return (
     <>
       <nav className='flex w-full justify-between py-4 px-10 top-0'>
-        <p className='font-bold'>Tutorial Tracker</p>
+        <p className='font-bold'>Tutorial Tracker 📝</p>
         <div className='flex gap-8'>
           <DropdownMenu>
             <DropdownMenuTrigger>
