@@ -5,6 +5,23 @@ import axios from 'axios';
 import ReactPlayer from 'react-player';
 import { useRouter } from 'next/navigation';
 import { useSession, signIn, signOut } from 'next-auth/react';
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/ui/avatar"
+import { Button } from '@/components/ui/button';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+  DropdownMenuSeparator
+} from "@/components/ui/dropdown-menu"
+import { IoIosLogOut } from "react-icons/io";
+import { FaPlus } from "react-icons/fa6";
+import { SkeletonCard } from './SkeletonCard';
+
 
 function Tutorials() {
   const router = useRouter();
@@ -33,34 +50,54 @@ function Tutorials() {
   }, [user]); 
 
   return (
-    <div>
-      {user ? (
-        <button className="rounded-xl font-bold" onClick={() => signOut()}>
-          Sign out
-        </button>
-      ) : (
-        <button className="rounded-xl font-bold" onClick={() => signIn()}>
-          Sign in
-        </button>
-      )}
-      <h1>Tutorials</h1>
+    <div className='min-h-screen w-full flex flex-col justify-center items-center'>
+
+      <nav className='flex w-full justify-between py-4 px-10'>
+        <p className='font-bold'>Tutorial Tracker</p>
+        <div className='flex gap-4'>
+          <DropdownMenu>
+            <DropdownMenuTrigger>
+              <Button>Menu</Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="px-2 py-4 float-end">
+              <DropdownMenuItem className='flex justify-center items-center gap-2' onClick={() => router.push('/tutorials')}>
+                Add Tutorial <FaPlus size={15} />
+              </DropdownMenuItem>         
+                {user ? (
+                  <DropdownMenuItem className='flex justify-center items-center gap-2' onClick={() => signOut()}>
+                    Sign out <IoIosLogOut size={15} />
+                  </DropdownMenuItem>
+                ) : (
+                  <DropdownMenuItem onClick={() => signIn()}>
+                    Sign in
+                  </DropdownMenuItem>
+                )}
+            </DropdownMenuContent>
+          </DropdownMenu>
+          <Avatar>
+            <AvatarImage src={user?.image} alt={user?.name} />
+          </Avatar>
+        </div>
+      </nav>
+
+      <h1 className='text-6xl text-purple-500 font-bold'>Your Tutorials</h1>
 
       {loading ? (
-        <p>Loading tutorials...</p>
+        <p>Loading...</p>
       ) : tutorials?.length === 0 ? (
-        <p>No tutorials found or failed to fetch data.</p>
+        <SkeletonCard/>
       ) : (
-        <ul>
+        <ul className='mt-12 grid grid-cols-1 md:grid-cols-2 gap-16'>
           {tutorials?.map((tutorial) => (
-            <li key={tutorial?.id}>
-              <p>
-                {tutorial?.title} - {tutorial?.link}
+            <li key={tutorial?.id} className='py-4'>
+              <p className='text-2xl font-bold py-2'>
+                {tutorial?.title}
               </p>
               {tutorial?.link && ReactPlayer.canPlay(tutorial?.link) ? (
                 <ReactPlayer
                   url={tutorial?.link}
                   controls={true}
-                  width={320}
+                  width={360}
                   height={240}
                 />
               ) : (
