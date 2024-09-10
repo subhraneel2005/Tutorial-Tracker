@@ -89,7 +89,11 @@ function Tutorials() {
       {loading ? (
         <p>Loading...</p>
       ) : tutorials?.length === 0 ? (
-        <SkeletonCard/>
+        <div className='mt-6 space-y-5 flex flex-col justify-center items-center '>
+           <p className='textxl'>You have no tutorials</p>
+
+           <Button onClick={() => router.push('/tutorials')}>Add a Tutorial</Button>
+        </div>
       ) : (
         <ul className='mt-12 grid grid-cols-1 md:grid-cols-2 gap-16'>
           {tutorials?.map((tutorial) => (
