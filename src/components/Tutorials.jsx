@@ -57,18 +57,19 @@ function Tutorials() {
     <>
       <nav className='flex w-full justify-between py-4 px-10 top-0'>
         <p className='font-bold'>Tutorial Tracker 📝</p>
-        <div className='flex gap-4'>
+        <div className='flex gap-7'>
+          <p className='flex justify-center items-center gap-2'>Completed: <span className='text-green-500 font-bold'>0</span></p>
           <DropdownMenu>
             <DropdownMenuTrigger>
               <Button>Menu</Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="px-2 py-4 float-end">
               <DropdownMenuItem className='flex justify-center items-center gap-2' onClick={() => router.push('/tutorials')}>
-                <p>Add Tutorial <FaPlus size={15} /></p>
+                <p>Add Tutorial</p>
               </DropdownMenuItem>         
                 {user ? (
                   <DropdownMenuItem className='flex justify-center items-center gap-2' onClick={() => signOut()}>
-                   <p> Sign out <IoIosLogOut size={15} /></p>
+                   <p> Sign out</p>
                   </DropdownMenuItem>
                 ) : (
                   <DropdownMenuItem onClick={() => signIn()}>
