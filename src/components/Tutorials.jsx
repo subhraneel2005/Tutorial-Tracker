@@ -49,10 +49,13 @@ function Tutorials() {
     }
   }, [user]); 
 
-  return (
-    <div className='min-h-screen w-full flex flex-col justify-center items-center'>
+  const dynamicPageHandler = (id) => {
+    router.push(`/tutorials/${id}`);
+  }
 
-      <nav className='flex w-full justify-between py-4 px-10'>
+  return (
+    <>
+      <nav className='flex w-full justify-between py-4 px-10 top-0'>
         <p className='font-bold'>Tutorial Tracker 📝</p>
         <div className='flex gap-4'>
           <DropdownMenu>
@@ -61,15 +64,15 @@ function Tutorials() {
             </DropdownMenuTrigger>
             <DropdownMenuContent className="px-2 py-4 float-end">
               <DropdownMenuItem className='flex justify-center items-center gap-2' onClick={() => router.push('/tutorials')}>
-                Add Tutorial <FaPlus size={15} />
+                <p>Add Tutorial <FaPlus size={15} /></p>
               </DropdownMenuItem>         
                 {user ? (
                   <DropdownMenuItem className='flex justify-center items-center gap-2' onClick={() => signOut()}>
-                    Sign out <IoIosLogOut size={15} />
+                   <p> Sign out <IoIosLogOut size={15} /></p>
                   </DropdownMenuItem>
                 ) : (
                   <DropdownMenuItem onClick={() => signIn()}>
-                    Sign in
+                    <p>Sign in</p>
                   </DropdownMenuItem>
                 )}
             </DropdownMenuContent>
@@ -79,8 +82,8 @@ function Tutorials() {
           </Avatar>
         </div>
       </nav>
-
-      <h1 className='text-6xl text-purple-500 font-bold'>Your Tutorials</h1>
+    <div className='min-h-screen w-full flex flex-col justify-center items-center'>
+      <h2 className='text-6xl text-purple-500 font-bold'>Your Tutorials</h2>
 
       {loading ? (
         <p>Loading...</p>
@@ -90,7 +93,7 @@ function Tutorials() {
         <ul className='mt-12 grid grid-cols-1 md:grid-cols-2 gap-16'>
           {tutorials?.map((tutorial) => (
             <li key={tutorial?.id} className='py-4'>
-              <p className='text-2xl font-bold py-2'>
+              <p onClick={() => dynamicPageHandler(tutorial?.id)} className='cursor-pointer text-2xl font-bold py-2'>
                 {tutorial?.title}
               </p>
               {tutorial?.link && ReactPlayer.canPlay(tutorial?.link) ? (
@@ -108,6 +111,7 @@ function Tutorials() {
         </ul>
       )}
     </div>
+    </>
   );
 }
 
