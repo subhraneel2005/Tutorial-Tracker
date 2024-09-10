@@ -26,3 +26,34 @@ export async function GET(req, { params }) {
         return NextResponse.json({ message: 'Failed to fetch tutorial' }, { status: 500 });
     }
 }
+
+export async function PATCH(req, {params}){
+    const user = await getCurrentUser();
+    const {id} = params;
+
+    try {
+        if(!user?.email){
+            return NextResponse.json({message: "User not authenticated"}, {status: 401});
+        }
+
+        const tutorial = await prisma.tutorial.findUnique({
+            where :{id: id}
+        });
+
+        if(!tutorial){
+            return NextResponse.json({message: "Tutorial not found"}, {status: 404});
+        }
+
+        const updatedTutorial = await prisma.tutorial.update({
+            where:{id: id},
+            data:{
+                done: !tutorial.done
+            }
+        });
+
+        return NextResponse.json(updatedTutorial, {status: 200});
+    } catch (error) {
+        return NextResponse.json({message: "Internal server error, Failed to updated tutorial"}, {status:500})
+    }
+
+}

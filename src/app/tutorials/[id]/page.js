@@ -5,6 +5,8 @@ import ReactPlayer from 'react-player';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function SingleTutorialPage({ params }) {
     const { id } = params; 
@@ -12,9 +14,27 @@ export default function SingleTutorialPage({ params }) {
     const [tutorial, setTutorial] = useState(null);
     const [loading, setLoading] = useState(true);
     const [isModalOPen, setIsModalOpen] = useState(true);
+    const [isCompleted, setIsCompleted] = useState(false)
 
     const modalHandler = () => {
         setIsModalOpen(!isModalOPen)
+    }
+
+    const completedHandler = async() => {
+        try {
+            const res = await axios.patch(`/api/tutorials/${id}`);
+            setTutorial(res.data);
+            const updatedTutorial = res.data;
+            if(updatedTutorial?.done){
+                toast('Tutorial Completed Yayyyyy🎉')
+            }
+            else{
+                toast('Tutorial Marked Incomplete🙁')
+            }
+        } catch (error) {
+            console.log(error);
+            toast('Unexpected error occured')
+        }
     }
 
     useEffect(() => {
@@ -40,6 +60,7 @@ export default function SingleTutorialPage({ params }) {
 
     return (
         <div className='min-h-screen w-full flex flex-col justify-center items-center'>
+            <ToastContainer/>
             <h2 className='text-6xl mb-32 text-purple-500 font-bold'>{tutorial?.title}</h2>
             <div className='h-full w-full flex justify-between md:px-16 px6 items-center'>
               {tutorial?.link && ReactPlayer.canPlay(tutorial?.link) ? (
@@ -55,7 +76,9 @@ export default function SingleTutorialPage({ params }) {
               <div className='w-[50%] flex flex-col space-y-6 justify-center items-center h-full'>
               <div className='flex gap-7'>
               <Button  onClick={modalHandler}>Add Notes➕</Button>
-              <Button>Completed✅</Button>
+              <Button onClick={completedHandler}>
+                {tutorial?.done ? 'Mark Incomplete' : 'Completed✅'}
+              </Button>
               </div>
 
               { isModalOPen === true &&
