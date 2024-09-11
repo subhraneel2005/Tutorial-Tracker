@@ -57,3 +57,27 @@ export async function PATCH(req, {params}){
     }
 
 }
+
+export async function POST(req, {params}){
+    const user = await  getCurrentUser();
+    const {id} = params;
+
+    try {
+        if(!user?.email){
+            return NextResponse.json({message: "User not authenticated"}, {status: 401});
+        }
+    
+        const {notes} = await req.json();
+    
+        const newTutorial = await prisma.tutorial.update({
+            where:{id: id},
+            data:{
+               notes
+            }
+        });
+        return NextResponse.json(newTutorial, {status: 200});
+    } catch (error) {
+        return NextResponse.json("error:  " + error.message, {status: 500});
+    }
+    
+}
