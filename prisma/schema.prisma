@@ -24,7 +24,7 @@ model Tutorial{
   id            String      @id @default(cuid())
   title         String
   link          String 
-  notes         String?
+  notes         String?     @default("")
   done          Boolean     @default(false)
   date          DateTime    @default(now())
   updatedAt     DateTime    @updatedAt

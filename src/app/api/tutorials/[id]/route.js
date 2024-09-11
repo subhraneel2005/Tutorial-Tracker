@@ -58,28 +58,32 @@ export async function PATCH(req, {params}){
 
 }
 
-export async function POST(req, {params}){
-    const user = await  getCurrentUser();
-    const {id} = params;
+export async function POST(req, { params }) {
+    const user = await getCurrentUser();
+    const { id } = params;
 
     try {
-        if(!user?.email){
-            return NextResponse.json({message: "User not authenticated"}, {status: 401});
+        if (!user?.email) {
+            return NextResponse.json({ message: "User not authenticated" }, { status: 401 });
         }
-    
-        const {notes} = await req.json();
-    
+
+        const { notes } = await req.json();
+
+       
+        const newNotes = notes ?? ''; 
+
         const newTutorial = await prisma.tutorial.update({
-            where:{id: id},
-            data:{
-               notes
-            }
+            where: { id: id },
+            data: {
+                notes: newNotes, 
+            },
         });
-        return NextResponse.json(newTutorial, {status: 200});
+
+        return NextResponse.json(newTutorial, { status: 200 });
     } catch (error) {
-        return NextResponse.json("error:  " + error.message, {status: 500});
+        console.error('Error adding notes to tutorial:', error); // Log detailed error
+        return NextResponse.json({ message: "Internal server error, Failed to add notes", error: error.message }, { status: 500 });
     }
-    
 }
 
 export async function PUT(req, { params }) {
