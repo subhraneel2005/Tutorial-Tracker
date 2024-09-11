@@ -77,7 +77,7 @@ function Create() {
         <div className='flex gap-8'>
           <DropdownMenu>
             <DropdownMenuTrigger>
-              <Button>Menu</Button>
+              Menu
             </DropdownMenuTrigger>
             <DropdownMenuContent className="px-2 py-4 float-end">
               <DropdownMenuItem className='flex justify-center items-center gap-2' onClick={() => router.push('/')}>

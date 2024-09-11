@@ -61,7 +61,7 @@ function Tutorials() {
           <p className='flex justify-center items-center gap-2'>Completed: <span className='text-green-500 font-bold'>0</span></p>
           <DropdownMenu>
             <DropdownMenuTrigger>
-              <Button>Menu</Button>
+             Menu
             </DropdownMenuTrigger>
             <DropdownMenuContent className="px-2 py-4 float-end">
               <DropdownMenuItem className='flex justify-center items-center gap-2' onClick={() => router.push('/tutorials')}>
