@@ -81,3 +81,61 @@ export async function POST(req, {params}){
     }
     
 }
+
+export async function PUT(req, { params }) {
+    const user = await getCurrentUser();
+    const { id } = params;
+
+    try {
+        if (!user?.email) {
+            return NextResponse.json({ message: "User not authenticated" }, { status: 401 });
+        }
+
+        const tutorial = await prisma.tutorial.findUnique({
+            where: { id: id }
+        });
+
+        if (!tutorial) {
+            return NextResponse.json({ message: "Tutorial not found" }, { status: 404 });
+        }
+
+        const { notes } = await req.json();  // Updated notes from the request body
+
+        const updatedTutorial = await prisma.tutorial.update({
+            where: { id: id },
+            data: { notes }
+        });
+
+        return NextResponse.json(updatedTutorial, { status: 200 });
+    } catch (error) {
+        return NextResponse.json({ message: "Internal server error, Failed to update notes" }, { status: 500 });
+    }
+}
+
+export async function DELETE(req, { params }) {
+    const user = await getCurrentUser();
+    const { id } = params;
+
+    try {
+        if (!user?.email) {
+            return NextResponse.json({ message: "User not authenticated" }, { status: 401 });
+        }
+
+        const tutorial = await prisma.tutorial.findUnique({
+            where: { id: id }
+        });
+
+        if (!tutorial) {
+            return NextResponse.json({ message: "Tutorial not found" }, { status: 404 });
+        }
+
+        const updatedTutorial = await prisma.tutorial.update({
+            where: { id: id },
+            data: { notes: null }  // Remove notes by setting them to null or an empty string
+        });
+
+        return NextResponse.json({ message: "Notes deleted successfully", tutorial: updatedTutorial }, { status: 200 });
+    } catch (error) {
+        return NextResponse.json({ message: "Internal server error, Failed to delete notes" }, { status: 500 });
+    }
+}
