@@ -18,6 +18,8 @@ model User {
   accounts      Account[]
   sessions      Session[]
   tutorials     Tutorial[]
+
+   @@map("users")
 }
 
 model Tutorial{
