@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Krona+One&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -66,5 +68,83 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: "Krona One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    background: linear-gradient(360deg, #4438E5 0%, #7918BA 33.6%, #9816A4 55.06%, #5E0766 100%);
   }
+}
+
+.navbar{
+  box-sizing: border-box;
+
+  position: absolute;
+  width: 500px;
+  height: 78px;
+  background: linear-gradient(90deg, #0B090A 0%, #161A1D 100%);
+  border: 1px solid #F5EDED;
+  border-radius: 60px;
+}
+
+.htext{
+font-style: normal;
+font-weight: 400;
+font-size: 48px;
+line-height: 60px;
+color: #FFFFFF;
+}
+
+.box{
+  box-sizing: border-box;
+  width: 440px;
+  height: 440px;
+  background: url(/pic.jpg);
+  background-position: center;
+  background-size: cover;
+  border: 1px solid #FFFFFF;
+  box-shadow: -36px 40px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 55px;  
+}
+
+.btn{
+width: 230px;
+height: 69px;
+background: linear-gradient(90deg, #0B090A 0%, #161A1D 100%);
+border: 1px solid #FFFFFF;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+border-radius: 26px;
+}
+
+
+.avatar{
+position: absolute;
+width: 71px;
+height: 71px;
+top: 40px;
+background: #D9D9D9;
+border: 3px solid #000000;
+}
+
+.mobileBox{
+box-sizing: border-box;
+background-position: center;
+background-size: cover;
+position: absolute;
+width: 281px;
+height: 281px;
+left: 60px;
+top: 156px;
+background: url(/pic.jpg);
+border: 1px solid #FFFFFF;
+box-shadow: -34px 42px 4px -12px rgba(0, 0, 0, 0.25);
+border-radius: 55px;
+}
+
+.mobileBtn{
+width: 186px;
+height: 54px;
+background: linear-gradient(90deg, #0B090A 0%, #161A1D 100%);
+border: 1px solid #FFFFFF;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+border-radius: 26px;
 }
