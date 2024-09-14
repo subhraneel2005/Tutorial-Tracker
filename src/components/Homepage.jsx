@@ -2,9 +2,13 @@
 
 import { useRouter } from 'next/navigation'
 import React from 'react'
+import { useSession } from 'next-auth/react';
 
 function Homepage() {
-  const router = useRouter()
+  const router = useRouter();
+  const { data: session } = useSession();
+  const user = session?.user;
+  
   return (
     <div className='min-h-screen w-full flex justify-center md:px-12 items-center'>
         <div className='mobileBox md:hidden flex'></div>
