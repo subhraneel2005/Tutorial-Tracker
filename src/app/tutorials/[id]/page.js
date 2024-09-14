@@ -99,7 +99,7 @@ export default function SingleTutorialPage({ params }) {
     return (
         <div className='min-h-screen w-full flex flex-col justify-center items-center'>
             <ToastContainer/>
-            <h2 className='text-6xl mb-32 text-purple-500 font-bold'>{tutorial?.title}</h2>
+            <h2 className='text-6xl mb-32 text-[#e0aaff] font-bold'>{tutorial?.title}</h2>
             <div className='h-full w-full flex justify-between md:px-16 px6 items-center'>
               {tutorial?.link && ReactPlayer.canPlay(tutorial?.link) ? (
                   <ReactPlayer

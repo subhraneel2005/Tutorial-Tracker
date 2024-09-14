@@ -21,6 +21,7 @@ import {
 import { IoIosLogOut } from "react-icons/io";
 import { FaPlus } from "react-icons/fa6";
 import { SkeletonCard } from './SkeletonCard';
+import Navbar from './Navbar';
 
 
 function Tutorials() {
@@ -53,42 +54,21 @@ function Tutorials() {
     router.push(`/tutorials/${id}`);
   }
 
+  if(loading){
+    return(
+        <div className='min-h-screen w-full flex justify-center items-center'>
+          <p>Loading...</p>
+        </div>
+    )
+  }
+
   return (
     <>
-      <nav className='flex w-full justify-between py-4 px-10 top-0'>
-        <p className='font-bold'>Tutorial Tracker 📝</p>
-        <div className='flex gap-7'>
-          <p className='flex justify-center items-center gap-2'>Completed: <span className='text-green-500 font-bold'>0</span></p>
-          <DropdownMenu>
-            <DropdownMenuTrigger>
-             Menu
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="px-2 py-4 float-end">
-              <DropdownMenuItem className='flex justify-center items-center gap-2' onClick={() => router.push('/tutorials')}>
-                <p>Add Tutorial</p>
-              </DropdownMenuItem>         
-                {user ? (
-                  <DropdownMenuItem className='flex justify-center items-center gap-2' onClick={() => signOut()}>
-                   <p> Sign out</p>
-                  </DropdownMenuItem>
-                ) : (
-                  <DropdownMenuItem onClick={() => signIn()}>
-                    <p>Sign in</p>
-                  </DropdownMenuItem>
-                )}
-            </DropdownMenuContent>
-          </DropdownMenu>
-          <Avatar>
-            <AvatarImage src={user?.image} alt={user?.name} />
-          </Avatar>
-        </div>
-      </nav>
     <div className='min-h-screen w-full flex flex-col justify-center items-center'>
-      <h2 className='text-6xl text-purple-500 font-bold'>Your Tutorials</h2>
+    <Navbar/>
+      <h2 className='text-6xl text-[#e0aaff] py-6 font-bold mt-[200px]'>Your Tutorials</h2>
 
-      {loading ? (
-        <p>Loading...</p>
-      ) : tutorials?.length === 0 ? (
+      { tutorials?.length === 0 ? (
         <div className='mt-6 space-y-5 flex flex-col justify-center items-center '>
            <p className='textxl'>You have no tutorials</p>
 
@@ -97,15 +77,15 @@ function Tutorials() {
       ) : (
         <ul className='mt-12 grid grid-cols-1 md:grid-cols-2 gap-16'>
           {tutorials?.map((tutorial) => (
-            <li key={tutorial?.id} className='py-4'>
-              <p onClick={() => dynamicPageHandler(tutorial?.id)} className='cursor-pointer text-2xl font-bold py-2'>
+            <li key={tutorial?.id} className='p-5 flex flex-col justify-center items-center tutorialBox'>
+              <p onClick={() => dynamicPageHandler(tutorial?.id)} className='max-w-[360px] text-[#c77dff] cursor-pointer text-2xl font-bold py-2'>
                 {tutorial?.title}
               </p>
               {tutorial?.link && ReactPlayer.canPlay(tutorial?.link) ? (
                 <ReactPlayer
                   url={tutorial?.link}
                   controls={true}
-                  width={360}
+                  width={340}
                   height={240}
                 />
               ) : (

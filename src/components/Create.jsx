@@ -58,9 +58,9 @@ function Create() {
       if (response.ok) {
         const data = await response.json();
         toast('Tutorial posted successfully!');
-        setTitle(''); // Clear the input fields after successful submission
+        setTitle(''); 
         setLink('');
-        router.push('/'); // Navigate to the homepage or wherever you want to go after posting
+        router.push('/view');
       } else {
         const errorData = await response.json();
         toast(errorData.message || 'Failed to post the tutorial.');
@@ -80,7 +80,7 @@ function Create() {
       {user && (
         <Card className="md:w-[700px] w-[350px] tutorialAdd">
           <CardHeader>
-            <CardTitle className='text-4xl flex text-violet-400 gap-4'>Create Tutorial <FaYoutube size={40} className='text-red-500' />
+            <CardTitle className='text-4xl flex text-[#e0aaff] gap-4'>Create Tutorial <FaYoutube size={40} className='text-red-500' />
             </CardTitle>
             <CardDescription>Add your tutorial in one-click.</CardDescription>
           </CardHeader>

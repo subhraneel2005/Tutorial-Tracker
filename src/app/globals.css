@@ -153,3 +153,11 @@ border-radius: 26px;
   box-shadow: -36px 40px 4px rgba(0, 0, 0, 0.25);
 }
 
+.tutorialBox{
+width: 375px;
+height: 480px;
+background: linear-gradient(180deg, #10002B 0%, #240046 51%, #3C096C 100%);
+box-shadow: -32px 48px 12.1px -8px rgba(0, 0, 0, 0.25);
+border-radius: 20px;
+}
+
