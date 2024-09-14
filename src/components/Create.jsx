@@ -71,13 +71,7 @@ function Create() {
     }
   };
 
-  if(!user){
-    return(
-      <div className='min-h-screen w-full flex justify-center items-center'>
-        <p>Loading...</p>
-      </div>
-  )
-  }
+
 
   return (
     <>
