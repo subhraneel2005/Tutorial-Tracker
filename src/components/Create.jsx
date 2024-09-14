@@ -28,6 +28,7 @@ import { ToastContainer, toast } from 'react-toastify';
     DropdownMenuSeparator
   } from "@/components/ui/dropdown-menu"
   import { FaPlus } from "react-icons/fa6";
+import Navbar from './Navbar'
 
 function Create() {
   const router = useRouter();
@@ -72,38 +73,12 @@ function Create() {
 
   return (
     <>
-      <nav className='flex w-full justify-between py-4 px-10 top-0'>
-        <p className='font-bold'>Tutorial Tracker 📝</p>
-        <div className='flex gap-8'>
-          <DropdownMenu>
-            <DropdownMenuTrigger>
-              Menu
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="px-2 py-4 float-end">
-              <DropdownMenuItem className='flex justify-center items-center gap-2' onClick={() => router.push('/')}>
-                Home
-              </DropdownMenuItem>          
-                {user ? (
-                  <DropdownMenuItem className='flex justify-center items-center gap-2' onClick={() => signOut()}>
-                    Sign out <IoIosLogOut size={15} />
-                  </DropdownMenuItem>
-                ) : (
-                  <DropdownMenuItem onClick={() => signIn()}>
-                    Sign in
-                  </DropdownMenuItem>
-                )}
-            </DropdownMenuContent>
-          </DropdownMenu>
-          <Avatar>
-            <AvatarImage src={user?.image} alt={user?.name} />
-          </Avatar>
-        </div>
-      </nav>
+      <Navbar/>
       <ToastContainer/>
     <div className='min-h-screen w-full flex flex-col justify-center items-center'>
 
       {user && (
-        <Card className="w-[350px] mb-[55px]">
+        <Card className="md:w-[700px] w-[350px] tutorialAdd">
           <CardHeader>
             <CardTitle className='text-4xl flex text-violet-400 gap-4'>Create Tutorial <FaYoutube size={40} className='text-red-500' />
             </CardTitle>
