@@ -90,7 +90,11 @@ export default function SingleTutorialPage({ params }) {
     }, [id]);
 
     if (loading) {
-        return <div>Loading...</div>;
+        return (
+            <div className='min-h-screen w-full flex justify-center items-center'>
+                <p>Loading...</p>
+            </div>
+        );
     }
     if (!tutorial) {
         return <div>Tutorial not found</div>;
