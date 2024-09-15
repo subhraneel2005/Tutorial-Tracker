@@ -77,7 +77,7 @@ function Tutorials() {
       ) : (
         <ul className='mt-12 grid grid-cols-1 md:grid-cols-2 gap-16'>
           {tutorials?.map((tutorial) => (
-            <li key={tutorial?.id} className='p-5 flex flex-col justify-center items-center tutorialBox'>
+            <li key={tutorial?.id} className='p-5 flex flex-col justify-center items-center border tutorialBox'>
               <p onClick={() => dynamicPageHandler(tutorial?.id)} className='max-w-[360px] text-[#c77dff] cursor-pointer text-2xl font-bold py-2'>
                 {tutorial?.title}
               </p>
